@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>FinePOSE</title>
+
+    <meta name="description" content="FinePOSE: Fine-Grained Prompt-Driven 3D Human Pose Estimation via Diffusion Models">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <base href="/"> -->
+
+        <!--FACEBOOK-->
+    <meta property="og:image" content="https://bakedsdf.github.io/img/breakdown_new.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="682">
+    <meta property="og:image:height" content="682">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bakedsdf.github.io"/>
+    <meta property="og:title" content="BakedSDF" />
+    <meta property="og:description" content="Project page for FinePOSE: Fine-Grained Prompt-Driven 3D Human Pose Estimation via Diffusion Models." />
+
+        <!--TWITTER-->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BakedSDF" />
+    <meta name="twitter:description" content="Project page for FinePOSE: Fine-Grained Prompt-Driven 3D Human Pose Estimation via Diffusion Models." />
+    <meta name="twitter:image" content="https://bakedsdf.github.io/img/breakdown_new.png"/>
+
+
+<!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍞</text></svg>">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+	
+<!--
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+-->
+	
+	<link rel="stylesheet" href="css/dics.min.css">
+    <script src="scripts/dics.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', domReady);
+        function domReady() {
+            for (const e of document.querySelectorAll(".b-dics")) {
+                new Dics({
+                    container: e,
+                    textPosition: "top"
+                });
+            }
+        }
+    </script>
+	
+</head>
+
+<!--<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>姓名右上角标号示例</title>
+<style>
+  .superscript {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* 设置姓名之间的右边距 */
+  }
+  .superscript span {
+    position: absolute;
+    top: -0.5em; /* 控制上偏移量 */
+    right: -0.5em; /* 控制右偏移量 */
+    font-size: 0.7em; /* 控制标号大小 */
+  }
+</style>
+</head>-->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>姓名右上角标号示例</title>
+<style>
+  .superscript {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px; /* 设置姓名之间的右边距 */
+  }
+  .superscript > span {
+    position: absolute;
+    top: -0.5em; /* 控制上偏移量 */
+    right: -0.5em; /* 控制右偏移量 */
+    font-size: 0.7em; /* 控制标号大小 */
+  }
+</style>
+</head>
+
+
+
+	
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+		<p><b style="color: black;">FinePOSE: Fine-Grained Prompt-Driven 3D Human Pose Estimation</b></p> 
+		<p><b style="color: black;">via Diffusion Models</b></p>
+                <small>
+		    <p><strong style="color: black;">
+                    <span class="superscript">Jinglin Xu<span>1</span></span>
+		    <span class="superscript">Yijie Guo<span>2</span></span>
+		    <span class="superscript">Yuxin Peng<span>2</span></span>*
+		    </strong></p>
+		    <span class="superscript">1</span>School of Intelligence Science and Technology, University of Science and Technology Beijing
+		    <br>
+		    <span class="superscript">2</span>Wangxuan Institute of Computer Technology, Peking University
+		    <br>
+		    * Corresponding author
+		    
+                </small>
+            </h2>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://">
+                            <image src="img/finepose_paper.png" height="120px"></image>
+                                <h4><strong>Paper(coming soon)</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="More Visualization.mp4">
+                            <image src="img/youtube_icon.png" height="120px"></image>
+                                <h4><strong>Video</strong></h4>
+                            </a>
+                        </li>
+			<li>
+                            <a href="https://github.com/PKU-ICST-MIPL/FinePOSE_CVPR2024">
+                            <image src="img/github.png" height="120px"></image>
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <!-- <image src="img/rays.jpg" class="img-responsive" alt="overview"><br> -->
+                <p class="text-justify">
+			The 3D Human Pose Estimation (3D HPE) task uses 2D images or videos to predict human joint coordinates in 3D space. Despite recent advancements in deep learning-based methods, they mostly ignore the capability of coupling accessible texts and naturally feasible knowledge of humans, missing out on valuable implicit supervision to guide the 3D HPE task. Moreover, previous efforts often study this task from the perspective of the whole human body, neglecting fine-grained guidance hidden in different body parts. To this end, we present a new Fine-Grained Prompt-Driven Denoiser based on a diffusion model for 3D HPE, named FinePOSE.
+It consists of three core blocks enhancing the reverse process of the diffusion model: (1) Fine-grained Part-aware Prompt learning (FPP) block constructs fine-grained part-aware prompts via coupling accessible texts and naturally feasible knowledge of body parts with learnable prompts to model implicit guidance. (2) Fine-grained Prompt-pose Communication (FPC) block establishes fine-grained communications between learned part-aware prompts and poses to improve the denoising quality. (3) Prompt-driven Timestamp Stylization (PTS) block integrates learned prompt embedding and temporal information related to the noise level to enable adaptive adjustment at each denoising step. Extensive experiments on public single-human pose estimation datasets show that FinePOSE outperforms state-of-the-art methods. We further extend FinePOSE to multi-human pose estimation. Achieving 34.3mm average MPJPE on the EgoHumans dataset demonstrates the potential of FinePOSE to deal with complex multi-human scenarios.
+                </p>
+            </div>
+        </div>
+
+
+        <!--<div class="row">
+	    <div class="col-md-8 col-md-offset-2">
+		<h3>Video</h3>
+    		<div class="text-center">
+        		<video controls width="640" height="360">
+            		<source src="More Visualization.mp4" type="video/mp4">
+            			Your browser does not support the video tag.
+        	</video>
+    		</div>
+	    </div>
+        </div>-->
+
+
+        
+	
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    FinePOSE
+                </h3>
+                <br>
+                <image src="img/FinePOSE_pipeline.jpg" style="width:100%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+                <p class="text-justify">
+                    We propose a new fine-grained part-aware prompt learning mechanism coupled with diffusion models that possesses human body part controllable high-quality generation capability, beneficial to the 3D human pose estimation task.
+		    Our method encodes multi-granularity information about action class, coarse- and fine-grained human parts, and kinematic information, and establishes fine-grained communications between learnable part-aware prompts and poses for enhancing the denoising capability
+                </p>
+            </div>
+        </div>
+
+
+	<div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Experiments
+                </h3>
+                <br>
+                <image src="img/exp1.png" style="width:100%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+		<br>
+                <image src="img/exp2.png" style="width:100%;" class="img-responsive center-block" alt="overview"></image>
+                <br>
+		<br>
+		<div style="display: flex; align-items: center; justify-content: center;">
+    		<img src="img/exp3.png" style="width:47%;" class="img-responsive" alt="overview">
+    		<img src="img/exp4.png" style="width:53%;" class="img-responsive" alt="overview">
+		</div>
+                <br>
+                <!--<p class="text-justify">
+                    We propose a new fine-grained part-aware prompt learning mechanism coupled with diffusion models that possesses human body part controllable high-quality generation capability, beneficial to the 3D human pose estimation task.
+		    Our method encodes multi-granularity information about action class, coarse- and fine-grained human parts, and kinematic information, and establishes fine-grained communications between learnable part-aware prompts and poses for enhancing the denoising capability
+                </p>-->
+            </div>
+        </div>
+		
+	<div class="row comp-margin">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    More Visualization Results
+                </h3>
+                <div class="b-dics" style="width: 100%">
+                    <img src="img/visual.jpg" />
+                </div>
+    		<div class="text-center">
+        		<video controls width="640" height="360">
+            		<source src="More Visualization.mp4" type="video/mp4">
+            			Your browser does not support the video tag.
+        	        </video>
+    		</div>
+	    </div>
+        </div>
+
+
+
+
+
+	<div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgement
+                </h3>
+		    Our code refers to the following repositories.
+		<br>
+                <ul>  
+  		    <li><a href="https://github.com/mingyuan-zhang/MotionDiffuse">MotionDiffuse</a></li>  
+  		    <li><a href="https://github.com/paTRICK-swk/D3DP">D3DP</a></li>  
+  		    <li><a href="https://github.com/JinluZhang1126/MixSTE">MixSTE</a></li>  
+		</ul>
+		    We thank the authors for releasing their codes.
+		<br>
+            </div>
+        </div>
+
+	</div>
+        </div>
+
+
+
+
+<!--
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Related links
+                </h3>
+                <p class="text-justify">
+                  Something something? or delete. could be like mipnerf360/volsdf, something that uses spherical gaussians? idk
+                </p>
+                </p>
+            </div>
+        </div>
+-->
+
+    </div>
+</body>
+</html>
